@@ -1,0 +1,1273 @@
+day09(java 7일차)
+복습 -> 2차원 배열 -> 메소드
+
+0. 복습
+1) 배열
+	하나의 타입으로 여러개의 값을 저장할 수 있는 저장공간
+
+2) 배열의 사용 목적
+	데이터의 집합을 효율적으로 관리하기 위한 목적
+	데이터의 순서를 보존하기 위한 목적
+	반복문을 사용하여 배열의 요소를 처리하기 위한 목적
+	메모리를 효율적으로 사용하기 위한 목적
+	데이터를 정렬하거나 검색하기 위한 목적
+
+3) 배열의 선언
+- 배열변수의 선언
+	자료형[] 참조변수; 
+	자료형 참조변수[];
+
+- 배열의 생성과 초기화
+	자료형[] 참조변수 = new 자료형[];
+	자료형[] 참조변수 = new 자료형[] {값1, 값2, 값3, ..};
+	자료형[] 참조변수 = {값1, 값2, 값3, ..};
+
+4) 배열의 구조
+	int[]	ar	=	new	int[3];
+
+	--------------		------------------
+	Stack영역			Heap 영역
+	[첫번째주소값]		[값1][값2][값3]
+	ar			 0    1    2	=> 인덱스 번호
+
+
+1. for-each문(빠른 for문, 확장for문)
+	배열이나 컬렉션을 순회할 떄 사용하는 반복문
+	요소의 타입과 변수명을 지정하여 간편하기 순회 가능
+
+// 일반for문
+	for(초기식; 조건식; 증감식){
+
+	}
+
+
+// for-each문
+	for(요소의 타입 변수명 : 배열 또는 컬렉선{
+		//요소에 대한 작업 수행
+	}
+
+1) for-each문의 특징
+	배열 또는 컬렉션의 모든 요소를 차례대로 접근
+	요소를 수정할 수 없음(읽기 전용)
+	인덱스 사용 불가능
+	요소의 타입은 배열 또는 컬렉션의 타입과 일치해야함
+
+2. 2차원 배열
+	배열 안에 배열
+	※ 2차원 이상의 배열은 메모리 낭비가 심하므로 선호하지 않는다
+	표 형태의 데이터를 저장항 때 주로 사용
+	자바에서는 2차원 배열도 1차원 배열의 배열이기 때문에 행마다 열의 길이가 다를 수 있음(가변배열)
+
+1) 2차원 배열 선언
+	자료형[][] 배열명 = new 자료형[행][열];
+	자료형[][] 배열명 = {(행){(열)값1, 값2, 값3},{값4, 값5, 값6}}
+
+	열은 생략 할 수 있으나, 행은 생략 할 수 없다
+
+2) 2차원 배열 길이
+	배열명.length;	행의 길이
+	배열명[i].length;	열의 길이
+
+3. 정렬 알고리즘
+	데이터를 정해진 순서대로 정렬하는 방법
+
+1) 정렬 알고리즘 종류
+	알고리즘		시간복잡도(평균)	공간복잡도		특징
+	**선택정렬		O(n²)		0(1)		가장 작은 값 선택 앞으로 이동
+	**삽입정렬		O(n²)		0(1)		거의 정렬된 경우 빠름
+	**버블정령		O(n²)		0(1)		가장 간단, 인접한 요소 비교
+	퀵정렬		O(n log n)	0(log n)	분할 정복 방식
+	벙합정렬		O(n log n)	0(n)		리스트 합병
+	힙정렬		O(n log n)	0(1)		최대/최소 힙 자료구조 사용
+	계수정렬		O(n + k)	0(n + k)	정수범위 작을 때 매우 빠름
+
+2) 선택정렬(Selection Sort)
+	현재 위치에서 가장 작은 값을 찾아 앞으로 보냄
+- 동작원리
+	배열에서 가장 작은 값을 찾아 현재 위치로 이동한다
+	다음 위치에서 가장 작은 값을 찾아 이동한다
+	마지막까지 반복한다
+
+3) 삽입정렬(Insertion Sort)
+	정렬된 영역에 하나씩 끼워넣음
+- 동작원리
+	두번째 요소부터 시작하여 이전 요소들과 비교한다
+	비교를 통해 자신의 위치를 찾은 후 그 자리에 삽입한다
+	나머지요소를 반복적으로 처리한다
+
+4) 버블정렬(Bubble Sort)
+	인접한 두 값을 비교해서 swap(교환)
+- 동작원리
+	반복적으로 배열을 순회하며 인접한 두 요소를 비교한다
+	두 요소의 순서가 잘못되었다면 교환(swap)한다
+	각 반복이 끝날 때 가장 큰 요소는 배열의 끝으로 이동하여 정렬된 상태가 된다
+	마지막 정렬된 요소를 제외하고 나모지 요소를 비교하고 정렬한다
+	배열이 완전히 정렬될 때까지 이 과정을 반복한다
+
+5) Arrays.sort()
+	java.utill.Array 클래스에 포함된 정렬 메소드
+	내부적으로 TimSort 알고리즘을 사용하며 합병정렬과 삽입 정렬을 결합한 고효율 알고리즘이다
+	기본적으로 오름차순으로 정렬되며 배열을 빠르고 효율적으로 정렬 할 수 있다
+
++) Arrays. toString(배열명)
+	.toString() 배열의 내용을 문자열 형식으로 반환하는 메소드
+	배열을 보기 쉽게 출력하기 위해 사용한다
+	기본적으로 1차원 배열의 내용을 출력할 수 있다
+
+
+4. 메소드
+0) 함수와 메소드
+	클래스 밖에서 선언되어있다면 함수라고 부르지만 클래스 내부에 선언되어있는 함수는 메소드라고 부른다
+	자바에서는 모든 함수가 클래스 내부에서 선언되기 때문에 메소드만 존재한다
+	자바에서는 메소드라고 부른다
+
+1) 메소드(method)
+	기능
+	이름 뒤에 소괄호
+	키워드 뒤에 소괄호는 메소드라고 부르지 않는다
+
+2) 메소드 선언과 구현(정의)
+	리턴타입 메소드명(자료형 매개변수, ...) <- 선언부
+	{			      <- 구현부
+		실행할문장;
+		return 리턴값;
+	}
+
+- 리턴타입 : 반활할 값이 있다면 반환값의 자료형을 작성한다. 없다면  void를 작성한다
+- 메소드명 : 동사로 작성한다
+- 매개변수 : 외부에서 전달받을 값이 있다면 자료형과 순서에 맞게 선언해준다(자료형이 반드시 필요하다)
+	생략이 가능하다(단, 생략하게 되면 외부에서 값을 받을 수 없다)
+- 실행할문장 : 생략이 가능하다. 메소드의 기능을 구현하는 코드를 작성한다
+- return : 생략이 가능하다. return이 실행되면 메소드가 종료된다.
+	리턴값이 있다면 메소드를 사용한 부분을 통채로 리턴값으로 본다.
+	리턴값이 없다면 값이 아니다.
+
+3) 메소드의 정의와 사용
+	메소드를 정의할 때는 {}중괄호가 있고, 반드시 메소드 밖에서 정의한다
+	메소드를 사용할 때는 {}중괄호가 없고, 반드시 메소드 안에서 사용한다
+
+
++) 메소드를 정의한 후 메소드를 호출 할 때 오류 나는 이유
+	java 어플리케이션을 실행하면 .java파일을 컴파일러가 해석하고 .class파일을 만들어준다
+	.class 파일을 JVM에 포함된 클래스 로더가 읽어내는데 static이 붙은 변수나 메소드를 먼저 메모리에 할당시킨다
+
+	int add(int num1, int num2) {
+		int result = num1 + num2;
+		return result;
+	}
+	
+	이 상태는 메모리에 올라가지 않은 상태이기 때문에 add라는 메소드를 못찾아서 오류가 발생한다
+
+-	메소드를 정의할 때 static 키워드를 붙여준다
+-	클래스명 참조변수 = new 클래스명();
+	해당 메소드가 있는 클래스를 알려준다
+	참조변수명.메소드명(); 형태로 사용하면된다
+
+4) 메소드 정의 순서
+	기능을 생각한다(숫자에 + 10을 더하는 기능)
+	반환타입을 생각한다. 우선void라고 작성한다
+		void
+	기능에 알맞은 메소드명을 생각한다(addTen)
+		void addTen
+	매개변수를 생각한다(정수형 매개변수1)
+		void addTen(int num)
+		{}
+	실행할 문장을 생각한다
+	숫자 + 10
+		void addTen(int num){
+			int result = num + 10;
+		}
+	리턴값을 생각한다
+		void addTen(int num){
+			int result = num + 10;
+			return result;
+		}
+	리턴값에 맞는 반환타입을 수정한다
+		int addTen(int num){
+			int result = num + 10;
+			return result;
+		}
+
+5) 메소드 호출 방법(메소드 사용)
+	매개변수	리턴값(반환값)	   호출방법
+	x	x		=> 메소드명();
+	o	x		=> 메소드명(인수);
+	x	o		=> syso(메소드명()); or 리턴값의타입 변수명 = 메소드명();
+	o	o		=> syso(메소드명(인수)); or 리턴값의타입 변수명 = 메소드명(인수);
+
+
+   // 1) 기능을 생각 => 음수를 양수, 양수는 음수
+   // 2) 리턴타입을 생각한다 => void
+   // 3) 메소드명을 생각한다 => changeSign
+   // 4) 매개변수를 생각한다 => 정수형 1개
+   // 5) 구현부 실행할문장을 생각한다 => 음수 -> 양수, 양수 -> 음수 => 매개변수 * -1
+   // 6) return 매개변수 * -1;
+   // 7) 리턴값에 맞는 타입으로 변경한다 => int
+
+
+
+====================================================================================================
+package review;
+
+public class ArrayTask01 {
+	public static void main(String[] args) {
+		
+		//1) 크기가 100인 배열 선언
+		//2) for문 통해 100부터 1까지 값 저장
+		//3) for문 배열 출력
+		//4) for문 통해 100부터 1까지 값 저장
+		//4) for문 배열 출력
+
+		int[] arr = new int[100];
+		System.out.println(arr);
+		
+		//값 저장하는 반복문
+		for(int i = 0; i < arr.length; i++) {
+			arr[i] = 100 - i; // 100 - 0;
+								// 100 - 1;
+		}
+		//값 출력하는 반복문
+		for(int i = 0; i < arr.length; i++) {
+		System.out.print(arr[i] + " ");
+	      }
+	}
+}
+====================================================================================================
+package review;
+
+public class ArrayTask02 {
+	public static void main(String[] args) {
+
+		//1) 10칸짜리 배열 선언
+		//2) 총할구할 변수 선언
+		//3) for문 (1부터 10까지 저장
+		//	int i = 0; => 배열명[i] = i + 1;
+		//	총합구할 변수 += 배열명[i];
+		//4) 총합출력
+		
+		int[] arr = new int[10];
+		int sum = 0;
+		
+		for(int i = 0; i < arr.length; i++) {
+			arr[i] = i + 1; //arr[0] = 0 + 1;
+								//arr[9] = 9 + 1;
+			sum += arr[i];
+			System.out.println("1부터 " + (i + 1) + "까지의 총합 : " + sum);
+		}
+
+		System.out.println("1부터 10까지의 총합 : " + sum);
+		
+	}
+
+}
+====================================================================================================
+package review;
+
+import java.util.Scanner;
+
+public class ArrayTask03 {
+	public static void main(String[] args) {
+		//3. 3명의 수학점수를 사용자에게 입력받아 배열에 저장하고 평균 점수를 출력
+
+		//1) 입력클래스 import
+		//2) 3칸짜리 배열 선언
+		//3) 총합 저장할 변수, 평균 저장할 번수 double avg
+		//4) for문 (1부터 3까지 반복)
+		//		몇번쨰 학생의 점수인지 출력
+		//		배열명[i] = nextInt()
+		//	총합저장할 변수 += 배열명[i]
+		//5) avg = 총합 / 3.0
+		
+//		int avg1 = 10 / 3;
+//		double avg2 = 10 / 3;
+//		double avg3 = 10 / 3.0;
+//		System.out.println(avg1);
+//		System.out.println(avg2);
+//		System.out.println(avg3);
+		
+		Scanner sc = new Scanner(System.in);
+		int[] scores = new int[3];
+		int sum = 0;
+		double avg = 0.0;
+		
+		for(int i = 0; i < scores.length; i ++) {
+			System.out.println((i + 1) + "번째 학생의 수학점수 입력 : ");
+			scores[i] = sc.nextInt();
+			sum += scores[i];
+//			System.out.println(sum);
+		}
+		avg = sum / 3.0;
+		System.out.println("평균점수 : " + avg);
+		avg = sum / 3;
+		System.out.println("정수형으로 나눴을 경우 평균점수 : " + avg);
+	}
+}
+====================================================================================================
+package review;
+//4. 0 1 2 3 0 1 2 3 배열에 담고 출력
+public class ArrayTask04 {
+	public static void main(String[] args) {
+		
+//		1) 정수형 8칸짜리 배열 선언
+//		2) for문(초기식 int i = 0; 조건식 i < 배열명.lenght; 증감식 i++
+//			배열명[i] = i % 4;
+//			[0] = 0 % 4;		=> 0
+//			[1] = 1 % 4;		=> 1
+//			[2] = 2 % 4;		=> 2
+//			[3] = 3 % 4;		=> 3
+//			[4] = 4 % 4;		=> 0
+//		3) for문 출력
+		int[] arr = new int[8];
+		for(int i = 0; i < arr.length; i++) {
+			arr[i] = i % 4;
+		}
+		
+			for(int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		
+	}
+}
+====================================================================================================
+package review;
+//5. A ~ F까지를 배열에 값을 넣고 출력
+public class ArrayTask05 {
+	public static void main(String[] args) {
+
+//		1) 문자형 6칸짜리 배열 선언
+//		2) 반복문 for		int i = 0;
+//			배열명[i] = (char)('A' + i)
+//		3) 출력할 반복문 for문
+
+	      char[] arr = new char[6];
+	      for(int i = 0; i < arr.length; i++) {
+	         arr[i] = (char)('A' + i);
+//	         System.out.println('A' + i);
+//	         System.out.println((char)('A' + i));
+	      }
+	      for(int i = 0; i < arr.length; i++) {
+	         System.out.print(arr[i] + " ");
+	      }
+		
+	}
+
+}
+
+====================================================================================================
+package review;
+
+public class ArrayTask06 {
+   public static void main(String[] args) {
+//      6. A ~ F까지 중 C만 제외하고 배열에 담아 출력
+      
+//      1) 문자형 5칸짜리 배열 선언
+//      2) 정수형 임시변수 = 0
+//      3) 반복문 (int i = 0 ; i < 배열명.length; i++)
+//         A B C D E F
+//         임시변수 = i;
+//         조건문(if 임시변수 > 1) 
+//            임시변수++
+//         배열명[i] = (char)(임시변수 + 65);
+//      4) 출력위한 반복문
+      char[] arr = new char[5];
+      int temp = 0;
+
+      for(int i = 0; i < arr.length; i++) {
+         temp = i;
+         if(temp > 1) {
+            temp++;
+         }
+         arr[i] = (char)(temp + 65);
+      }
+      for(int i = 0; i < arr.length; i++) {
+         System.out.println(arr[i]);
+      }
+      
+      //방법2) index와 ch변수 이용
+      char ch = 'A';
+      int index = 0;
+      while(index < 5) {
+         if(ch != 'C') {
+            arr[index++] = ch;
+         }
+         ch++;
+//         System.out.println(arr);
+      }
+      
+      
+      for(int i = 0; i < arr.length; i++) {
+         System.out.println(arr[i]);
+      }
+   }
+}
+====================================================================================================
+package review;
+//7. aBcDeFgHiJkLmNoPqRsTuVwXyZ 배열에 담고 출력
+public class ArrayTask07 {
+	public static void main(String[] args) {
+
+//		1) 26칸 짜리 문자형 배열
+//		2) 반복문(for문)
+//			사항연산자 값대입
+//		3) 출력하는 for문
+		
+	      char[] arr = new char[26];
+	      for(int i = 0; i < arr.length; i++) {
+	         arr[i] = (char)(i % 2 != 0 ? i + 65 : i + 97);
+			}
+
+		for(int i = 0; i < arr.length; i++) {
+		System.out.print(arr[i]);
+		}
+		
+	}
+}
+====================================================================================================
+package review;
+
+import java.util.Scanner;
+
+//8. 5개의 정수를 입력받은 뒤 그 값을 배열에 담고 최대값과 최소값 출력
+public class ArrayTask08 {
+	public static void main(String[] args) {
+
+//		1) 정수형 5칸짜리 배열 선
+//		2) 출력메시지(String msg 변수 선언)
+//		3) 입력클래스 import
+//		4) 최대값, 최소값 변수 선언
+//		5) for(초기식 int i = 0	조건식 i < 배열명.length; 증감식 i++)
+//			msg 출력
+//			배열명[i] = sc.nextInt();
+//		6) 최대값, 최소값 변수 = 0번째 인덱스 값 대입
+//		7) 크기 비교한 for문
+//			if(최대값 < 배열명[i]) { 최대값 = 현재인덱스값 대입}
+//			if(최소값 > 배열명[i]) { 최소값 = 현재인덱스값 대입}
+//		8) 최대값, 최소값 출력
+		
+		int[] arr = new int[5];
+		Scanner sc = new Scanner(System.in);
+		String msg = "번째 정수 입력 : ";
+		int max = 0, min = 0;
+		
+		for(int i = 0; i < arr.length; i++) {
+			System.out.println((i + 1) + msg);
+			arr[i] = sc.nextInt();
+//			System.out.println(arr[i]);
+		}
+		
+		max = arr[0];
+		min = arr[0];
+		
+		for(int i = 1; i < arr.length; i++) {
+			if(max < arr[i]) {
+				max = arr[i];
+			}
+			if(min > arr[i]) {
+				min = arr[i];
+			}
+		}
+		
+		System.out.println("최대값 : " + max);
+		System.out.println("최소값 : " + min);
+		
+	}
+}
+====================================================================================================
+
+package Array;
+//1번 : for-each문(빠른 for문, 확장for문)
+public class ForEachtest {
+	public static void main(String[] args) {
+		//1부터 5까지의 값을 담은 배열선언
+		int[] ar1 = new int[5];
+		
+		//값을 대입하는 반복문
+		for(int i = 0; i < ar1.length; i++) {
+			ar1[i] = i + 1;
+		}
+		
+		//값을 출력하는 반복문
+		for(int i = 0; i < ar1.length; i++) {
+			System.out.println(ar1[i]);
+		}
+		
+		//for-each문
+		int sum = 0;
+		for(int num : ar1) {
+//			System.out.println(num);
+			sum += num;
+			System.out.println(sum);
+		}
+
+	}
+
+}
+
+====================================================================================================
+
+package Array;
+//2) 3과목 점수의 총합과 평균점수 구하기(for-each문만 이용)
+public class ForEachtest02 {
+	public static void main(String[] args) {
+		
+		int[] scores= {100, 88, 99};
+		//1) 총합구할 변수 선언
+		//2) 총합 구하기(for-each문)
+		//3) 평균 구하기
+		//4) 출력
+		
+		int sum = 0;
+		for(int score : scores) {
+			sum += score;
+		}
+		
+		double avg = sum / (double)scores.length;
+		
+		System.out.println("총합 : " + sum);
+		System.out.printf("평균 : %.2f", avg);
+		
+	}
+}
+
+====================================================================================================
+package twoArray;
+//3번 : 2차원 배열(행과 열록 구성된 데이터를 저장하는 배열의 형태)
+public class TwoArrayTest01 {
+	public static void main(String[] args) {
+		// 2차원 배열의 선언
+		int[][] ar1 = new int [3][2];
+		
+		System.out.println(ar1);
+		//[[I@1f32e575 : 2차원 배열 전체의 참조값(JVM에 의해 제공) 
+//		[[0, 0], [0, 1]]
+//		[[1, 0], [1, 1]]
+//		[[2, 0], [2, 1]]
+		
+		System.out.println(ar1[0]);
+		//[I@279f2327 : 0행의 참조값(1차원배열)
+//		[0, 0]
+		
+		System.out.println(ar1[0][0]);
+		//0		1차원 배열의 첫번째 값(초기화된 기본값)
+		
+		//2차원 배열 선언
+		int[][] ar2 = {{10, 20, 30}, {40, 50, 60}};
+		System.out.println(ar2);
+		System.out.println(ar2[0][0]);
+		System.out.println(ar2[0][1]);
+		System.out.println(ar2[0][2]);
+		System.out.println(ar2[1][0]);
+		System.out.println(ar2[1][1]);
+		System.out.println(ar2[1][2]);
+		
+		System.out.println("2차원 배열(행) : " + ar2.length); //행의 길이
+		System.out.println("2차원 배열(열) : " + ar2[0].length); //열의 길이
+		
+		for(int i = 0; i < ar2.length; i++) { // 행 반복
+			for(int j = 0; j < ar2[i].length; j++) { // 열 반복
+				System.out.println();
+			}
+		}	
+	}
+}
+====================================================================================================
+
+package twoArray;
+
+//4번 : 2차원 배열과 for문, for-each문
+public class TwoArrayTest02 {
+   public static void main(String[] args) {
+      int[][] ar1 = { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };
+
+      System.out.println(ar1.length); // 행의 길이
+      System.out.println(ar1[0].length); // 열의 길이
+
+      System.out.println(ar1); // 2차원 배열의 전체 시작주소값
+      System.out.println(ar1[0]); // 2차원 배열의 0행의 시작주소값
+      System.out.println(ar1[1]); // 2차원 배열의 1행의 시작주소값
+      System.out.println(ar1[2]); // 2차원 배열의 2행의 시작주소값
+      System.out.println(ar1[3]); // 2차원 배열의 3행의 시작주소값
+//      System.out.println(ar1[4]); //2차원 배열에 4행까지만 있으므로 인덱스범위 벗어나 오류발생
+
+//      System.out.println(ar1[0][0]); //1
+//      System.out.println(ar1[0][1]); //2
+////      System.out.println(ar1[0][2]);
+//      System.out.println(ar1[1][0]); //3
+//      System.out.println(ar1[1][1]);
+//      System.out.println(ar1[2][0]);
+//      System.out.println(ar1[2][1]);
+
+      System.out.println("===========");
+      for (int i = 0; i < ar1.length; i++) { // 행
+         // i는 행의 인덱스번호
+//         System.out.println(i);
+//         System.out.println(ar1[i]);
+         for (int j = 0; j < ar1[i].length; j++) { // 열
+            System.out.print(ar1[i][j]);
+         }
+         System.out.println();
+      }
+
+      int[][] ar2 = { { 1, 2, 3 }, { 4, 5 }, { 6 } };
+//      System.out.println(ar2[0][0]);
+//      System.out.println(ar2[0][1]);
+//      System.out.println(ar2[0][2]);
+//      System.out.println(ar2[1][0]);
+//      System.out.println(ar2[1][1]);
+//      System.out.println(ar2[1][2]);
+
+//      123
+//      45
+//      6
+      for (int i = 0; i < ar2.length; i++) {
+         for (int j = 0; j < ar2[i].length; j++) {
+            System.out.print(ar2[i][j]);
+         }
+         System.out.println();
+      }
+
+      for (int[] data : ar2) {
+         System.out.println(data);
+         for (int value : data) {
+            System.out.print(value);
+         }
+         System.out.println();
+      }
+
+   }
+}
+
+====================================================================================================
+
+package twoArray;
+
+//5번 : 2차원 배열 연습
+public class TwoArrayTest03 {
+   public static void main(String[] args) {
+
+      // 1 2 3 4
+      // 5 6 7 8
+      // 9 10 11 12
+
+      // 1. 배열명 ar1 값 넣고 출력하기
+      int[][] ar1 = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 10, 11, 12 } };
+
+      // 행의길이 : ar1.length
+      // 열의길이 : ar1[i].length
+
+      for (int i = 0; i < ar1.length; i++) {
+         for (int j = 0; j < ar1[i].length; j++) {
+            System.out.print(ar1[i][j] + "\t");
+         }
+         System.out.println();
+      }
+
+      System.out.println();
+      // 2. 배열명 ar2 칸수만 선언 후 값 대입 후 출력
+      int[][] ar2 = new int[3][4];
+      // ar2 크기만 지정된 2차원 배열 3개의 행과 4개의 열
+      // 이중 for문을 이용하여 1부터 값 대입
+      int value = 1;
+
+      for (int i = 0; i < ar2.length; i++) {
+         for (int j = 0; j < ar2[i].length; j++) {
+//            System.out.println("i : " + i + ", j : " + j);
+//            System.out.println(ar2[i][j]);
+            ar2[i][j] = value++;
+            System.out.print(ar2[i][j] + "\t");
+         }
+         System.out.println();
+      }
+
+   }
+}
+
+====================================================================================================
+
+package twoArray;
+
+import java.util.Arrays;
+
+//6번 : 선택정렬
+public class SelectionSort {
+   public static void main(String[] args) {
+
+      int[] number = { 5, 2, 9, 1, 6 };
+      
+      System.out.println("초기 배열 : " + Arrays.toString(number));
+      
+      for(int i = 0; i < number.length -1; i++) {
+         //최소값 저장할 변수
+         int minIdx = i;
+         
+         //최소값 찾기 위한 for문
+         for(int j = i + 1; j < number.length; j++) {
+            if(number[j] < number[minIdx]) {
+               minIdx = j;
+            }
+         }
+         
+         //최소값과 현재 요소 교환
+         int temp = number[minIdx];
+         number[minIdx] = number[i];
+         number[i] = temp;
+         
+         System.out.println((i + 1) + "단계 : " + Arrays.toString(number));
+         
+      }
+      System.out.println("정렬완료 : " + Arrays.toString(number));
+      
+   }
+}
+
+
+====================================================================================================
+
+package twoArray;
+
+import java.util.Arrays;
+
+//7번 : 삽입정렬
+public class InsertionSort {
+   public static void main(String[] args) {
+      
+      int[] number = { 5, 2, 9, 1, 6 };
+      System.out.println("초기배열 : ");
+      
+      for(int num : number) {
+         System.out.print(num + " ");
+      }
+      System.out.println();
+      
+      for(int i = 1; i < number.length; i++) {
+         int key = number[i];
+         int j = i - 1;
+         
+         //key보다 큰 값을 오른쪽으로 이동
+         while(j >= 0 && number[j] > key) {
+            number[j + 1] = number[j];
+            j--;
+         }
+         
+         number[j + 1] = key;
+         System.out.println(i + "단계 : " + Arrays.toString(number));
+      }
+      System.out.println("정렬완료 : " + Arrays.toString(number));
+   }
+}
+
+====================================================================================================
+
+package review;
+
+import java.util.Scanner;
+
+//8. 5개의 정수를 입력받은 뒤 그 값을 배열에 담고 최대값과 최소값 출력
+public class ArrayTask08 {
+	public static void main(String[] args) {
+
+//		1) 정수형 5칸짜리 배열 선
+//		2) 출력메시지(String msg 변수 선언)
+//		3) 입력클래스 import
+//		4) 최대값, 최소값 변수 선언
+//		5) for(초기식 int i = 0	조건식 i < 배열명.length; 증감식 i++)
+//			msg 출력
+//			배열명[i] = sc.nextInt();
+//		6) 최대값, 최소값 변수 = 0번째 인덱스 값 대입
+//		7) 크기 비교한 for문
+//			if(최대값 < 배열명[i]) { 최대값 = 현재인덱스값 대입}
+//			if(최소값 > 배열명[i]) { 최소값 = 현재인덱스값 대입}
+//		8) 최대값, 최소값 출력
+		
+		int[] arr = new int[5];
+		Scanner sc = new Scanner(System.in);
+		String msg = "번째 정수 입력 : ";
+		int max = 0, min = 0;
+		
+		for(int i = 0; i < arr.length; i++) {
+			System.out.println((i + 1) + msg);
+			arr[i] = sc.nextInt();
+//			System.out.println(arr[i]);
+		}
+		
+		max = arr[0];
+		min = arr[0];
+		
+		for(int i = 1; i < arr.length; i++) {
+			if(max < arr[i]) {
+				max = arr[i];
+			}
+			if(min > arr[i]) {
+				min = arr[i];
+			}
+		}
+		
+		System.out.println("최대값 : " + max);
+		System.out.println("최소값 : " + min);
+		
+	}
+}
+
+====================================================================================================
+
+
+package twoArray;
+
+import java.util.Arrays;
+
+//9번 : 버블 정렬
+public class BubbleSort {
+   public static void main(String[] args) {
+      int[] number = {5, 2, 9, 1, 6};
+      
+      System.out.println("초기 배열 : " + Arrays.toString(number));
+      
+      for(int i = 0; i < number.length; i++) {
+         boolean swap = false; // 교환 발생여부
+         for(int j = 0; j < number.length - 1 - i; j++) {
+            if(number[j] > number[j+1]) {
+               //두 요소 교환(swap)
+               int temp = number[j];
+               number[j] = number[j+1];
+               number[j+1] = temp;
+               swap = true;
+            }
+         }
+         System.out.println((i + 1) + "단계 : " + Arrays.toString(number));
+         //i = 0   => j = 0 < 4 ture
+         if(!swap) {
+            break;
+         }
+      }
+      System.out.println("정렬완료 : " + Arrays.toString(number));
+      
+   }
+}
+
+====================================================================================================
+
+package twoArray;
+//10번 : Arrays.sort()
+import java.util.Arrays;
+
+public class ArraySortTest01 {
+   public static void main(String[] args) {
+
+      // 1차원 배열
+      int[] number = { 5, 2, 6, 3, 1, 8 };
+
+      // 2차원 배열
+      int[][] number2 = { { 5, 2, 6 }, { 3, 1, 8 } };
+
+      System.out.println(number);
+      System.out.println("1차원 배열 값 출력 : " + Arrays.toString(number));
+      System.out.println(number2);
+      System.out.println("1차원 배열 값 출력 : " + Arrays.toString(number2));
+      System.out.println("2차원 배열 값 출력 : " + Arrays.deepToString(number2));
+
+      System.out.println("\n정렬 전 number : " + Arrays.toString(number));
+      Arrays.sort(number); // number 배열 오름차순 정렬
+      System.out.println("정렬 후 number : " + Arrays.toString(number));
+
+      System.out.println("정렬 전 number2 : " + Arrays.deepToString(number2));
+//      Arrays.sort(number2); 2차원배열은 정렬되지 않고 오류 발생함
+// 		2차원 배열의 내부 요소 정렬은 for문이나 수동정렬이 필요하다!!
+//      for(int i = 0; i < number2.length; i++) {
+//    	  Arrays.sort(number2[i]);
+//      }
+      for(int[] row : number2) {
+    	  Arrays.sort(row);
+      }
+      System.out.println("정렬 후 number2 : " + Arrays.deepToString(number2));
+
+   }
+}
+
+====================================================================================================
+
+package methodTest;
+//11번 : 메소드 정의
+public class MethodTest01 {
+	public static void main(String[] args) {
+		//메소드 호출
+//		System.out.println(add(10, 20));
+		
+		MethodTest01 mt1 = new MethodTest01();
+		System.out.println(mt1); //참조값
+		System.out.println(mt1.add(10, 20)); 
+		
+
+	}
+
+	int add(int num1, int num2) {
+		int result = num1 + num2;
+		return result;
+	}
+	
+	//메소드 정의 순서
+	//1) 기능을 생각한다 (두 수를 더하는 기능)
+//		반환타입 메소드명(자료형 매개변수){}
+	//2) 반환타입이 생각나지 않는다면 우선 void를 작성한다
+//		void 메소드명() {}
+	
+	//3) 매소드명을 생각한다(기능에 알맞은 이름으로, 가능하면 동사로)
+//		add, sum, plus, ...
+//		void add(자료형 매개변수){}
+	
+	//4) 매개변수를 생각한다(매개변수 2개)
+//		viod add(int num1, int num2){}
+	//5) 실행항 문장을 작성한다
+//		void add(int num1, int num2){
+//			int result = num1 + num2;
+//		}
+	
+	//6) 리턴값을 생각한다
+//		void add(int num1, int num2){
+//		int return = num1 + num2
+//		return result;
+//		}
+	
+	//7) 리턴타입을 리턴값에 맞는 타입으로 변경한다
+	
+}
+
+====================================================================================================
+
+package methodTest;
+//12번 : 메소드 호출방법
+public class MethodTest02 {
+	public static void main(String[] args) {
+		
+		//메소드 호출 시 2가지
+		//1) 메소드 정의하는 부분에서 static 키워드를 붙인다(static 키워드 배우기 전까지 사용하지 않음)
+		// main메소드가 메모리에 할당될 때 해당 메소드도 같이 메모리 할당시키는 방법
+		
+		//2) 메인 메소드에 해당 메소드가 있는 클래스를 알려준다
+		//클래스명 객체명 = new 클래스명();
+		
+		MethodTest02 mt = new MethodTest02();
+//		System.out.println(mt);
+
+		//매개변수x, 리턴값x 메소드 호출 => 객체명.메소드명();
+		mt.printHello();
+//		System.out.println(mt.printHello());
+		
+	//매개변수o, 리턴값x 메소드 호출 => 객체명. 메소드명
+		mt.greet("민경승");
+		mt.greet("짱구");
+		mt.greet("철수");
+		
+	      //매개변수x, 리턴값o 메소드 호출 => syso(객체명.메소드명());
+	      //                  or 리턴타입 변수명 = 객체명.메소드명();
+	      System.out.println("1부터 10까지의 합 : " + mt.printTotal());
+	      int number = mt.printTotal();
+	      System.out.println(number);
+	      
+	      //매개변수o, 리턴값o 메소드 호출 => syso(객체명.메소드명(인수));
+//	      						or 리턴타입 변수명 = 객체명.메소드명(인수);
+	      System.out.println(mt.printNum(3));
+	}
+	
+	//매개변수 x, 리턴값 o 메소드 정의
+	//1부터 10까지의 합을 반환하는 메소드
+	int printTotal() {
+		
+		//1) 총합구할변수
+		int total = 0;
+		//2) for문 초기식 int i = 1; i <= 10; i++
+		for(int i = 1; i <= 10; i++) {
+			//3)	총합구할분수 += i;
+			total += i;
+		}
+		//4) 반환값
+		return total;
+	}
+	
+
+	//매개변수 o, 리턴값 x 메소드 정의
+	//이름 + 님 환영합니다! 출력하는 메소드
+	void greet(String name) {
+		System.out.println(name + "님 환영합니다!");
+	}
+	
+	//매개변수 x, 리턴값x 메소드 정의
+	//"안녕하세요" 출력하는 메소드
+	void printHello() {
+		for(int i = 0; i < 5; i++) {
+		System.out.println("안녕하세요!");
+		}
+	}
+	
+	//매개변수 o, 리턴값 o 메소드 정의
+	//정수1개를 넘겨받아 1부터 넘겨받은 정수까지의 합을 반환하는 메소드
+	
+	int printNum(int num) {
+	//1부터 num까지의 합 반환하는 기능
+	int total = 0;
+	for(int i = 1; i <= num; i++) {
+	total += i;
+	}
+	return total;
+	}
+
+}
+
+====================================================================================================
+
+package methodTest;
+
+public class MethodTask {
+   // 1. 음수를 양수로, 양수를 음수로 바꿔주는 메소드 매개변수o, 리턴값o
+   // 메소드명 : changeSign
+
+   // 1) 기능 생각 => 음수면 양수로, 양수면 음수로
+   // 2) 리턴타입 생각 => void
+   // 3) 메소드명 생각 => changeSign
+   // 4) 매개변수 생각 => 정수형 1개
+   // 5) 구현부 실행할 문장 생각 => 음수 -> 양수, 양수 -> 음수 (매개변수명 * -1)
+   // 6) return 매개변수 * -1;
+   // 7) 리턴값에 맞는 타입으로 변경한다 => int
+
+   int changeSign(int num) {
+      return num * -1;
+   }
+
+   // 2. 이름과 정수를 받아와서 정수만큼 이름을 출력하는 메소드
+   // 매개변수o, 리턴값o
+   // 메소드명 : printName
+
+   // 1) 기능 => 전달된 정수만큼 전달된 이름 출력
+   // 2) 리턴타입 => void
+   // 3) 메소드명 => printName
+   // 4) 매개변수 => 2개(int, String)
+   // 5) 구현부{ 실행할 문장 =>
+   // 5-1) for문( 초기식 int i = 1; 조건식 i <= 정수형 매개변수; 증감식++)
+   // 5-2) { syso(문자열매개변수); }
+   // 6) 리턴값 => "정수 : " + 정수형매개변수 + "이름 : " + 문자열매개변수;
+   // 7) 리턴타입을 수정 => String
+
+   String printName(int num, String name) {
+      for (int i = 1; i <= num; i++) {
+         System.out.println(name);
+      }
+      return "정수 : " + num + ", 이름 : " + name;
+   }
+   // 3. 10이하의 숫자는 1로 10을 초과하는 숫자는 100으로 반환하는 메소드
+   // 매개변수o, 리턴값o
+   // 메소드명 : changeNumber
+
+   // 1) 리턴타입 => int
+   // 2) 메소드명 => changeNumber
+   // 3) 매개변수 => 정수형 1개
+   // 4) 실행할문장 //5) 리턴값 => 리턴값 삼항 연산자
+
+   int changeNumber(int num) {
+      return num <= 10 ? 1 : 100;
+   }
+
+   // 4. 5개의 정수 중 평균을 반환하는 메소드
+   // 매개변수o(배열), 리턴값o
+   // 메소드명 : getAvg
+
+   // 1) 리턴타입 => void
+   // 2) 메소드명 => getAvg
+   // 3) 매개변수 => int[] ar
+   // 4) 실행할문장 =>
+   // 총합구할 변수
+   // 반복문(for-each문){
+   // 총합구할변수 += 반복문변수;
+   // }
+   // 5) 리턴 생각 => (실수형) 총합구할변수 / 배열.length;
+   // 6) 리턴타입을 double 변경
+
+   double getAvg(int[] ar) {
+      int total = 0;
+      for (int num : ar) {
+         total += num;
+      }
+      return total / (double) ar.length;
+   }
+
+   // 5. 정수 배열 중 최대값과 최소값을 출력하는 메소드
+   // 매개변수o(배열), 리턴값x
+   // 메소드명 : printMinMax
+
+   // 1) 리턴타입 => void
+   // 2) 메소드명 => printMinMax
+   // 3) 매개변수 => int[] ar
+   // 4) 실행할문장 => 최소값, 최대값을 0번째 인덱스로 저장하고 반복문 통해 비교
+   // 0번째 인덱스의 값보다 작은값이 최소값, 큰값이 최대값이 된다 출력
+
+   void printMinMax(int[] ar) {
+      int min = ar[0];
+      int max = ar[0];
+
+      for (int i = 1; i < ar.length; i++) {
+//         if(ar[i] < min) {
+//            min = ar[i];
+//         }
+         min = min > ar[i] ? ar[i] : min;
+         max = max < ar[i] ? ar[i] : max;
+      }
+      System.out.println("최소값 : " + min + ", 최대값 : " + max);
+   }
+
+   // 6. 소문자는 대문자로, 대문자는 소문자로 바꿔주는 메소드
+   // 예시 ) BanAnA => bANaNa
+   // 메소드명 : changeCase
+   // 매개변수와 반환값은 자유 => 단, 형변환 이용할것!
+
+   // 1) 리턴타입 => void
+   // 2) 메소드명 => changeCase
+   // 3) 매개변수 => 문자열 1개
+   // 4) 실행할문장 =>
+   // 문자형 변수1 선언
+   // 문자열 변수2 선언
+   // for문( int i=0; i < 매개변수.length(); i++){
+   // 변수1 = 매개변수.charAt(i);
+//         조건문(if~else if~else)
+   // if(변수1 >= 97 && 변수1 <= 122{
+   // 변수2 += (char)(변수1 - 32);
+   // }else if(변수1 >= 65 && 변수 <= 90){
+   // 변수2 += (char)(변수1 + 32);
+   // }else{
+   // 잘못된 값입니다 출력
+   // }}
+   // return 변수2;
+   // 5) 리턴타입 수정 => String
+   
+   String changeCase(String str) {
+      char c = ' ';
+      String result = "";
+      
+      for(int i = 0; i < str.length(); i++) {
+         c = str.charAt(i);
+         if(c >= 97 && c <= 122) {
+            result += (char) (c - 32);
+         }else if(c >= 65 && c <= 90) {
+            result += (char) (c + 32);
+         }else {
+            result = "잘못된 값입니다";
+         }
+      }
+      return result;
+   }
+   
+
+   // 7. 아이디와 비밀번호를 입력받아 로그인하기
+   // 매개변수o 리턴값o(리턴타입 boolean)
+   // 메소드명 : login
+   // main 메소드에서 id가 admin이고 비밀번호가 1234이면 관리자님 환영합니다 출력
+   // 둘중하나라도 틀리면 다시 확인하세요 출력
+
+   public static void main(String[] args) {
+
+      MethodTask mt = new MethodTask();
+
+      // 매개변수o, 리턴값o => syso(객체명.메소드명(인수));
+      System.out.println("===========1번===========");
+      System.out.println(mt.changeSign(100));
+      System.out.println(mt.changeSign(-100));
+
+      System.out.println("\n===========2번===========");
+      System.out.println(mt.printName(2, "짱구"));
+      String value = mt.printName(3, "철수");
+      System.out.println(value);
+
+      System.out.println("\n===========6번===========");
+      System.out.println(mt.changeCase("HELLO")); //hello
+      System.out.println(mt.changeCase("java")); //JAVA
+      System.out.println(mt.changeCase("HeLlO")); //hElLo
+      
+      
+//      double getAvg(int[] ar) {
+//         int total = 0;
+//         for(int num : ar) {
+//            total += num;
+//         }
+//         return (double)(total / ar.length);
+//      }
+
+//      int[] ar = { 10, 20, 30 };
+//      System.out.println(mt.getAvg(ar));
+//      System.out.println(mt.getAvg(new int[] { 15, 22, 37 }));
+//      System.out.println((15 + 22 + 37) / 3.0);
+   }
+}
+
+====================================================================================================
+
+package methodTest;
+
+public class MethodTask02 {
+   public static void main(String[] args) {
+      
+      //1. 정수1개를 받아서 짝수입니다, 홀수입니다를 반환하는 메소드
+      //메소드명 : checkNum
+      
+      //2. 10칸짜리 정수 배열을 받아 총합을 계산하여 반환하는 메소드
+      // 메소드명 : getSum
+      
+      //3. 문자열을 매개변수로 받아 거꾸로 뒤집어 반환하는 메소드
+      //메소드명 : reverseStr
+      // hello => olleh
+      
+      //4. 정수형 배열과 찾을 값을 매개변수로 받아서 배열에 존재하면 true 반환하는 메소드
+      //메소드명 : contains
+      //배열 요소 중에 10이라는 값을 반드시 넣고 10을 매개변수로 전달
+//      syso(메소드명(배열명, 10)) => true
+      
+      //5. 단수를 매개변수로 받아 해당 단의 구구단을(1 ~ 19)을 출력하는 메소드
+      //메소드명 : printGugudan
+      //   3 x 1 = 3
+      //   ...
+      //   3 x 19 = _
+      
+      //6. 두개의 문자열을 입력받아서 두 문자열의 길이가 같으면 같음, 다르면 다름 반환하는 메소드
+      //메소드명 : compareLength
+      
+      //7. 아이디와 비밀번호를 매개변수로 받아 검증, 시도횟수 3회 넘기면 잠금 반환
+      //loginTry
+      
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

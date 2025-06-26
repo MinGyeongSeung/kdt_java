@@ -1,0 +1,813 @@
+day06(java 4일차)
+복습 -> 연산자2 -> 제어문(조건문)
+
+0. 복습
+1) JAVA
+	1995년 공식 발표
+	sun 마이크로시스템사 제임스 고슬링팀 개발
+
+	**객체지항언어
+	**플랫폼 독립성
+	**자동 메모리 관리
+
+2) 변수
+	하나의 자료형, 하나의 값을 저장할 수 있는 저장공간
+	자료형 변수명, = 값;
+
+3) 입출력 메소드
+	출력메소드
+	System.out.println();
+	System.out.print();
+	System.out.printf();
+
+	입력메소드
+	입력메소드를 사용하기 위해서는 입력클래스가 반드시 필요하다
+	Scanner sc = new Scanner(System.in);
+	Scanner 클래스는 java.util 패키지 안에 있기 때문에 반드시 import 받아와야 한다
+
+	입력메소드
+	.next();
+	.nextLine();
+	.nextInt();
+	.nextDouble();
+
+4) 연산자(기능이 있는 특수기호)
+	최우선
+	단향
+	산술
+	쉬프트
+	관계
+	논리
+	삼향
+	대입
+
+5) 산술연산자
+	+, -, *, /, %
+
+6) 증감연산자
+	단향연상자
+	++, --
+	전위형, 후위형
+
+1. 관계연산자(비교연산자)
+	조건식	결과가 참 또는 거짓, 둘 중 하나가 나오는 식(boolean타입으로 결과가 나온다)
+
+	>, < 초과 미만
+	>=, <= 이상 이하
+	==, != 같다 같지않다
+
+	a > b a가 b 보다 크니? 맞으면 true 틀리면 false
+	a < b a가 b 보다 작니? 맞으면 true 틀리면 false
+	a >= b a가 b 보다 크거나 같니? 맞으면 true, 틀리면 false
+	a <= b a가 b 보다 작거나 같니? 맞으면 true, 틀리면 false
+	a == b a가 b랑 같니? 맞으면 true, 틀리면 false
+	a != b a가 b랑 같지않니? 맞으면 true 틀리면 false
+
+	System.out.println(num1 + ">" + num2 + " : " + (num1 > num2));
+	// 문자열과 연산자는 같은선상에 둘 수없다(괄호쓰기)
+
+2. 논리연산자
+	and	: 두 조건식이 모두 참이면 참
+	or	: 두 조건식 중 하나라도 참이 면 참
+	not	: 조건식이 참이면 거짓으로, 거짓이면 참으로
+
+	rtue && true
+	rtue || false
+	!rtue
+
+3. 삼항연산자(?:)
+	조건식? 참일때의 값 : 거짓일때의 값
+	삼향연산자의 결과는 값이다
+	변수에 저장할 수 있고 출력도 가능하다
+	거짓일 때의 값에 삼항연산자를 한 번 더 작성하면 삼항연산자의 중첩으로 3개의 값을 출력할 수 있다
+
+4. 비트연산자
+1) 비트와 바이트의 개념
+비트(bit)
+	정보의 최소 단위
+	한 비트는 0, 1 두가지의 값만 표현 할 수 있다
+	ex) 스위치(켜짐/꺼짐), 참/거짓
+
+바이트(byte)
+	8개의 비트를 묶어서 1byte
+	영어문자 A -> 01000001 (1byte)
+
+왜 비트 단위로 연산할까?
+	고급언어 -> 컴퓨터 언어(저급언어)로 바꾸는 과정을 생략 가능 -> 연산 속도 향상
+
+2) 비트연산자
+	AND(&)	논리곱
+	두 비트가 모두 1이면 1, 아니면 0
+	10 ->   1010
+	11 -> & 1011
+	=============
+		1010
+
+	OR(|)	논리합
+		두 비트 중 하나라도 1이면 1
+	10 ->   1010
+	11 -> | 1011
+	=============
+		1011
+
+	XOR(^)	배타논리합
+		두 비트가 서로 다르면 1
+
+	10 ->   1010
+	11 -> ^ 1011
+	=============
+		0001
+
+	NOT(~)	논리부정
+		비트가 0은 1로, 1이면 0으로
+		부호비트 또한 반대로 바꿔줌(양수->음수, 음수->양수)
+		~n => -(n + 1) 
+	
+	00001010	=> 10
+	    0101	=> 5로 예상하지만 결과는 -11로 나온다
+	--------
+	11110101	=> -11
+
+	2의 보수 형식으로 음수를 표현
+	00001010
++	       0
+	--------
+	00001011	=> 11
+
+	=> 10이라는 10진수는 2진수로 1010(2)가 된다 (몫이 1일 때까지 2로 나누면 된다)
+		~1010 0101(2) 5가 나올거라 예상하지만 결과는 -11이 나온다
+
+	(증명) 컴퓨터는 덧셈만 가능하기 때문에 뺄셈을 구현하려면 음수가 필요하다
+		비트중 가장 아ㅠ에 있는 비트를 최상위 비트라고한다. 최상위 비트는 부호비트로 사용된다(0:양수, 1:음수)
+
+		1010으로 쓴 양의 정수 10은 앞에 부호비트 01010인 것이다
+		-01010 => 부호비트가 1로 바뀌기 때문에 음수로 변환된다
+
+		반전된 이진수 : 11110101
+		2의 보수	  : 00001010 
+		+1 추가	  : 00001011
+
+	십진수 10 -> 이진수 1010(2)
+	십진수 11 -> 이진수 1011(2)
+
++) 1의 보수 : 이진수의 모든 비트를 반전시켜서 구한다(1 -> 0, 0 -> 1)
+	음수를 표현하기 위해 사용되었지만 지금은 2의 보수가 더 많이 사용된다
+
+	양수 5	=> 0101
+	1의 보수	=> 1010
+
+	음수 표현 : -x => x의 1의 보수
+	0000	양수 0
+	1111 	음수 -0
+
++) 2의 보수 : 1의 보수 + 1로 계산된다
+
+	양수 5 	=> 0101
+	1의보수	=> 1010
+	2의보수	=> 1010 +1 => 1011
+
+	음수표현 : -x => x의 2의 보수
+	0은 유일한 형태로 존재 0000
+
+3) 쉬프트 연산자(이동)
+좌쉬프트 A << B : A의 비트를 왼쪽으로 B만큼 이동시킨다
+	오른쪽에 생기는 빈칸은 0으로 채워진다
+	지정된 비트수를 넘어가면 잘린다
+	ex) 5 << 1	=> 10 왼쪽으로 한번 이동하면 숫자가 2배로 증가
+	    5 << 2	-> 20 
+
+우쉬프트 A >> B : A의 비트를 오른쪽으로 B만큼 이동시킨다
+	왼쪽에 생기는 빈칸은 부호비트에 따라 달라진다(양수 0으로 채워지고 음수면 1로 채워진다)
+	이동 중 잘린 비트는 삭제된다
+	ex) 8 >> 1	=> 4	오른쪽으로 한 번 이동하면 숫자가 절반으로 줄어듦
+	    8 >> 2	=> 2
+
++) 암호화와 복호화
+	데이터를 안전하게 전송하거나 저장하기 위한 과정
+
+1) 암호화
+	원본 데이터를 변형하여 외부에서 알아보기 어려운 형태로 만든 과정
+	특정 알고리즘과 키를 사용하여 원본 데이커를 암호화
+	결과로 나온 암호문은 원본 데이터와는 다른 형태의 데이터이며, 키를 알지 못하는 한 해독하기 어렵다
+
+
+2) 복호화
+	암호화 된 데이터를 다시 원래의 형태로 되돌리는 과정
+	암호화할 때 사용한 알고리즘과 동일한 키를 사용하여 암호화된 데이터를 해독
+	복호화된 결과는 원본 데이터로 복원
+	
++) 대칭키와 비대팅키
+1) 대칭키
+	대칭키 암호화는 하나의 키를 사용하여 데이터를 암호화하고 복호화하는 방법
+	대칭키 암호화는 속도가 빠르고 효율적이며 대부분의 일상적인 데이터 보호 작업에 사용	
+
+	a라는 문자를 암호화 : korea key 보내는 사람과 받는 사람 korea key 동일한 키를 가지고 있어야 한다
+
+2) 비대칭키
+	두 개의 서로 다른 키(공개키와 개인키)를 사용하여 데이터를 암호화하고 복호화 하는 방법
+	공개키는 누구나 알 수 있는 키이며 개인키는 소유자만 알고있어야 하는 밀한 키
+	데이터를 공개키를 암호화하면 개인키로만 복호화 할 수 있고, 개일키로 암호화된 데이터는 공개키로만 복호화 할 수 있다
+	데이터의 안전한 전송과 디지털 서명에 사용
+
+5. 제어문1
+	프로그램의 흐름을 제어한다
+
+	조건문	조건식의 결과에 따라서 실행흐름을 결정한다
+		if문, if ~ else, if ~ else if ~ else ,switch문
+
+	반복문	특정 조건을 만족할 때까지 실행 코드를 반복 실행한다
+		for문, while문, do~while문
+
+	기타제어문 흐름을 건너뛰거나 즉시 종료한다
+		bereak문, continue문
+
+6. 조건문
+1) if문
+	조건식의 결과가 true이면 중괄호 영역 안으로 들어가서 문장을 실행하고 다음 코드를 순차적으로 실행한다
+	조건식의 결과가 false이면 중괄호 영역 안으로 들어가지 않고 다름 코드를 순차적으로 실행한다
+
+	if (조건식) {
+		실행할 문장;
+	}
+
+	조건식이 true면 실행할문장 실행 후에 순차적으로 실행된다
+	조건식이 false if문 중괄호안은 실행하지 않고 순차적으로 실행된다
+
+2) if ~ else문
+	조건식의 결과가 true, false 각각의 분기를 만들어서 해당 중괄호 영역 안으로 들어가 문장을 실행한다
+
+* 문법
+	if(조건식){
+		조건식이 true일 때 실행할 문장;
+	}else{
+		조건식이 false일 때 실행할 문장;
+	}
+
+3) if ~ else if ~ else문
+	조건식1의 결과가 true if문 중괄호 영역안의 문장 실행
+	조건식1의 결과가 false라면 else if문 조건식2를 확인한다
+	조건식2의 결과가 true라면 else if문 중괄호 영역안의 문장 실행
+	위의 조건식의 결과가 모두 false라면 else문 중괄호 영역안의 문장 실행
+
+* 문법
+	if (조건식1){
+	조건식1이 true일 때 실행할 문장;
+	} else if (조건식2){
+		조건식1이 false이고 조건식2이 true일 때 실행할 문장;
+	} else {
+		조건식1과 조건식2의 결과가 false일 때 실행할 문장;   
+	} else {
+		모든 조건식의 결과가 false일 때 실행할 문장;   
+	}
+
+- if문	: 조건문을 사용할 때 반드시 있어야한다
+- else if문 : 확인해야하는 조건식이 2개 이상일 경우 작성한다
+- else문 : 위의 조건식이 모두 거짓일 때 실행할 문장을 작성한다
+
+※ if~if문, if~else if문
+	if~if문은 모든 조건식을 확인한다
+	if~else if문은 if문의 조건식을 확인 한 뒤 true 라면 아래 문장은 스킵한다
+
+※ if문의 중첩
+	if문 안에 if문이 있는 것을 의미한다
+	if(조건식1){
+		if(조건식2){
+			조건식1과 조건식2가 모두 true 실행할문장;
+		}else{
+			조건식1만 true일 때 실행할 문장;
+		}
+
+4) switch문
+	저건식의 값에 따라 여러 case 중 하나를 실행한다
+
+	switch ( 변수 or 값 ){
+		case 값1:
+			값1일 때 실행문;
+			break;
+		case 값2:
+			값2일 때 실행문;
+			break;
+		case 값3:
+			값3일 때 실행문;
+			break;
+
+		...
+		default:
+			위 값들에 해당하지않을 때 실행문;
+			break;
+	}
+
+- switch문에서 사용할 수 있는 변수 타입 : byte, short, int, char, String, enum
+- 사용할 수 없는 타입 : long, float, double, boolean
+
++) 삼항연산자, if문, switch문
+- 삼항연산사 : 조건식이 1개만 있을 경우
+- if문 : 조건식에 논리연산자를 사용하거나 조건식이 2개 이상인 경우
+- switch문 : 하나의 변수에 여러개의 값이 담길 수 있고 case의 값과 같은지를 비교할 때 사용
+
+코인 노래방 프로그램
+한곡당 300원인 코인노래방이다. 사용자에게 금액을 입력받고 부를 수 있는 곡 수, 잔 돈을 출력
+금액입력 : 1000
+3곡을 부를 수 있으며 잔돈은 100원 입니다
+
+클래스명 : SingTask01
+1) 한 곡당 금액도 입력받기
+금액입력 : 1000
+곡 당 가격 입력 : 300
+[출력]
+3곡을 부를 수 있으며 잔돈은 100원 입니다
+
+2) 잔돈이 부족할 경우 안내하기
+금액입력 : 100
+곡 당 가격 입력 :
+[출력]
+입력한 금액은 100원 입니다. 곡 당 가격은 000원으로 000원이 부족하여 노래를 부를 수 없습니다 출력
+
+클래스명 : SingTask02
+3) 남은 금액으로 음료 구매 가능 여부 추가(한 곡당 금액 200원, 음료 금액은 100원)
+급액입력 : 1000
+[출력]
+5곡을 부를 수 있으며 잔돈은 0원 입니다
+음료를 마시고 싶으면 4곡을 부를 수 있으며 잔돈은 100원 입니다
+
+클래스명 : SingTask03
+4) 총 부른 곡 수에 따른 보너스 곡 지급
+5곡을 부르면 1곡 추가 제공
+
+========================================================================================
+
+package review;
+// 1번 : 과제
+import java.util.Scanner;
+
+public class Day05_1 { // 클래스 중괄호 시작 영역
+   public static void main(String[] args) { // main 중괄호 시작 영역
+
+      /*
+       * 1. 물건값과 지불 금액을 입력받아 거스름돈을 출력하기 단, 거스름돈을 1000원, 500원, 100원 짜리로 나누어 표시하세요. 클래스명
+       * : Day05_1
+       * 
+       * [입출력예시] 
+       * 물건값 : 2700 
+       * 지불금액 : 5000 
+       * 거스름돈은 2300원입니다. 
+       * 1000원 : 2개, 500원 : 0개, 100원 : 3개
+       */
+
+      // 로직구성
+      // 1) 입력클래스 import
+      Scanner sc = new Scanner(System.in);
+      // 2) 출력메시지
+      System.out.println("물건값 입력 : ");
+      // 3) 정수형 변수1 입력메소드(next())
+      int price = Integer.parseInt(sc.next());
+      // 4) 출력메시지
+      System.out.println("지불금액 : ");
+      // 5) 정수형 변수2 입력메소드(next())
+      int paid = Integer.parseInt(sc.next());
+      // 6) 정수형 변수3 변수2 - 변수1(산술연산자)
+      int change = paid - price;
+      // 7) 출력(거스름돈은 00원입니다)
+      System.out.println("거스름돈은 " + change + "원 입니다.");
+//방법1)      
+      // 8) 출력(변수3 / 1000)
+      // 9) 출력((변수3 % 1000) / 500)
+      // 10) 출력((변수3 % 1000) % 500) / 100))
+
+//방법2)
+      // 8) 정수형변수 선언 = 변수3 / 1000;
+      int thousand = change / 1000;
+      // 9) 변수3 %= 1000;
+      change %= 1000; 
+      // 10) 정수형변수 선언 = 변수3 / 500;
+      int fiveHundred = change / 500;
+      // 11) 변수3 %= 500;
+      change %= 500;
+      // 12) 정수형변수 선언 = 변수3 / 100;
+      int hundred = change / 100;
+      // 13) 출력
+      System.out.println("1000원 : " + thousand + "개\n" 
+            + "500원 : " + fiveHundred + "개\n" 
+            + "100원 : " + hundred + "개");
+   } // main 중괄호 끝 영역
+} // 클래스 중괄호 끝 영역
+
+========================================================================================
+package review;
+// 2번 : 과제2
+import java.util.Scanner;
+
+public class Day05_2 {
+   public static void main(String[] args) { //main 시작
+      
+//      2. 이름과 나이를 입력받아 내년 나이를 출력하기(nextInt() 사용금지)
+//      클래스명 : Day05_2
+//
+//      [입출력예시]
+//      이름 : 홍길동
+//      나이 : 20
+//      홍길동님의 내년 나이는 21살입니다.
+//      만 나이는 19살입니다.
+
+      //1) 입력 클래스 import
+      //2) 문자열 변수 1개, 정수형 변수 1개 선언
+      //3) 입력 메시지
+      //4) 이름변수 = nextLine()
+      //5) 입력메시지
+      //6) 나이변수 = nextLine() 형변환
+      //7) 출력
+      
+      Scanner sc = new Scanner(System.in);
+      String name;
+      int age;
+      System.out.print("이름 입력 : ");
+      name = sc.nextLine();
+      System.out.print("나이 입력 : ");
+      age = Integer.parseInt(sc.nextLine());
+      System.out.println(name + "님의 내년 나이는 " + (age + 1) + "살입니다.");
+      System.out.println("만 나이는 " + (age - 2) + "살입니다.");
+   } //main 끝
+}
+========================================================================================
+package oper;
+//3번 : 관계연산자와 논리 연산자
+public class OperTest01 {
+   public static void main(String[] args) { //main 시작
+      
+      System.out.println("=======관계 연산자======");
+      
+      int num1 = 10, num2 = 20, num3 = 10;
+      System.out.println(num1 + " > " + num2 + " : " + (num1 > num2));
+      System.out.println(num1 + " < " + num2 + " : " + (num1 < num2));
+      System.out.println(num1 + " >= " + num2 + " : " + (num1 >= num2));
+      System.out.println(num1 + " <= " + num2 + " : " + (num1 <= num2));
+      System.out.println(num1 + " == " + num2 + " : " + (num1 == num2));
+      System.out.println(num1 + " != " + num2 + " : " + (num1 != num2));
+      System.out.println(num1 + " == " + num3 + " : " + (num1 == num3));
+      
+//      System.out.println(10 >= 10);
+      
+      System.out.println("\n=======논리 연산자======");
+      System.out.println("and : 둘 다 참이면 참(&&)");
+      System.out.println(true && true);   //true
+      System.out.println(true && false);   //false
+      System.out.println(false && true);   //false
+      System.out.println(false && false);   //false
+      
+      System.out.println("\nor : 둘 중 하나라도 참이면 참(||)");
+      System.out.println(true || true);   //true
+      System.out.println(true || false);   //true
+      System.out.println(false || true);   //true
+      System.out.println(false || false);   //false
+      
+      System.out.println("\nnot : 참이면 거짓, 거짓이면 참(!)");
+      System.out.println(!true); //false
+      System.out.println(!false); //true
+            
+      
+   } //main 끝
+}
+========================================================================================
+package oper;
+
+import java.util.Scanner;
+
+//4번 : ~논리연산자까지 복습문제
+public class OperTask01 {
+   public static void main(String[] args) {
+      
+      //1. 사용자가 입력한 2개의 값을 서로 비교하기(관계연산자 3개 확인)
+      //nextInt() 사용, 변수를 먼저 만들고 진행할 것!
+      //변수 만들 때 의미있는 문자로 사용
+      
+      //로직구성부터!
+      //1) 입력클래스 import
+      //2) 정수형 변수 2개 선언
+      //3) 입력 메시지 출력(숫자 2개를 입력(띄어쓰기로) : )
+      //4) 변수 입력메소드사용(nextInt())
+      //5) 출력(3개)      
+      //+) sc.close();
+      Scanner sc = new Scanner(System.in);
+      int num1, num2;
+//      System.out.println("숫자 2개를 띄어쓰기로 구분하여 입력하세요 : ");
+//      num1 = sc.nextInt();
+//      num2 = sc.nextInt();
+//      System.out.println(num1 + " < " + num2 + " : " + (num1 < num2));
+//      System.out.println(num1 + " > " + num2 + " : " + (num1 > num2));
+//      System.out.println(num1 + " > " + num2 + " || " + num1 + " == " + num2 + " : " + (num1 > num2 || num1 == num2));
+      
+      //실수 관계연산자 사용
+      double num3, num4;
+      System.out.println("실수 2개를 띄어쓰기로 구분하여 입력하세요 : ");
+      num3 = sc.nextDouble();
+      num4 = sc.nextDouble();
+      System.out.println(num3 + " < " + num4 + " : " + (num3 < num4));
+//      0.00000001 0.00000000001
+//      1.0E-8 < 1.0E-11 : false
+//      1.0E-8 10의 -8제곱(소수점아래 8자리)
+//      1.0E-11 10의 -11제곱(소수점아래 11자리)
+   }
+}
+
+========================================================================================
+      //정수 2개를 입력받아서 큰 수 구하기
+      //입력클래스 import
+      //입력 메시지 출력
+      //정수형 변수 2개 선언
+      //문자열 변수 1개 선언, 삼항연산자 대입
+      //출력
+      //sc.close()
+      
+      Scanner sc = new Scanner(System.in);
+      System.out.println("비교할 두 숫자를 입력하세요");
+      int num1 = sc.nextInt();
+      int num2 = sc.nextInt();
+      String result = num1 < num2 ? num2 + "가 큽니다" : num2 + "가 크지 않습니다";
+      System.out.println(num1 + "과 " + num2 + "비교 결과는 " + result);
+========================================================================================
+package oper;
+
+import java.util.Scanner;
+
+//4번 : ~논리연산자까지 복습문제
+public class OperTask01 {
+   public static void main(String[] args) {
+      
+      //1. 사용자가 입력한 2개의 값을 서로 비교하기(관계연산자 3개 확인)
+      //nextInt() 사용, 변수를 먼저 만들고 진행할 것!
+      //변수 만들 때 의미있는 문자로 사용
+      
+      //로직구성부터!
+      //1) 입력클래스 import
+      //2) 정수형 변수 2개 선언
+      //3) 입력 메시지 출력(숫자 2개를 입력(띄어쓰기로) : )
+      //4) 변수 입력메소드사용(nextInt())
+      //5) 출력(3개)      
+      //+) sc.close();
+      Scanner sc = new Scanner(System.in);
+      int num1, num2;
+//      System.out.println("숫자 2개를 띄어쓰기로 구분하여 입력하세요 : ");
+//      num1 = sc.nextInt();
+//      num2 = sc.nextInt();
+//      System.out.println(num1 + " < " + num2 + " : " + (num1 < num2));
+//      System.out.println(num1 + " > " + num2 + " : " + (num1 > num2));
+//      System.out.println(num1 + " > " + num2 + " || " + num1 + " == " + num2 + " : " + (num1 > num2 || num1 == num2));
+      
+      //실수 관계연산자 사용
+      double num3, num4;
+      System.out.println("실수 2개를 띄어쓰기로 구분하여 입력하세요 : ");
+      num3 = sc.nextDouble();
+      num4 = sc.nextDouble();
+      System.out.println(num3 + " < " + num4 + " : " + (num3 < num4));
+//      0.00000001 0.00000000001
+//      1.0E-8 < 1.0E-11 : false
+//      1.0E-8 10의 -8제곱(소수점아래 8자리)
+//      1.0E-11 10의 -11제곱(소수점아래 11자리)
+   }
+}
+
+
+========================================================================================
+package oper;
+
+import java.util.Scanner;
+
+//6번 : 삼항연산자 실습1
+public class OperTask02 {
+   public static void main(String[] args) {
+
+      // 1. 두 수를 입력받아 비교
+      // 크다, 작다, 같다가 각각 상황에 맞게 출력되도록 로직 구성
+      // 1) 입력클래스 import
+      // 2) 입력 메시지 출력
+      // 3) 변수 선언, 입력메소드 사용
+      // 4) 입력메시지 출력
+      // 5) 변수 선언, 입력메소드 사용
+      // 6) 삼항연산자 사용하여 출력 => 크다/작다/같다가 출력되어야함
+//      조건식 ? 참일때의 값 : 거짓일때의 값
+//      조건식1 ? 참일 때의 값 : 조건식2 ? 참일때의 값 : 거짓일 때의 값
+      Scanner sc = new Scanner(System.in);
+      System.out.println("크기 비교할 숫자 1 입력 : ");
+      int num1 = sc.nextInt();
+      System.out.println("크기 비교할 숫자 2 입력 : ");
+      int num2 = sc.nextInt();
+      String result = num1 > num2 ? "큰 수 : " + num1 : (num1 == num2) ? "같은 수" : "큰 수 : " + num2;
+      System.out.println(result);
+
+      System.out.println(num1 > num2 ? "큰 수 : " + num1 : (num1 == num2) ? "같은 수" : "큰 수 : " + num2);
+
+      // 2. 한 개의 정수를 입력받아서 짝수인지 아닌지 출력하기
+      // 짝수입니다 or 짝수가 아닙니다로 출력할 것
+
+      // 1) 입력 메시지 출력
+      // 2) 정수형 변수 1개(입력메소드), 문자열변수 1개(삼항연산자, 산술연산자, 관계연산자)
+      // 3) 출력
+      System.out.println("숫자 1개 입력 : ");
+      int number = sc.nextInt();
+      String result1 = (number % 2 == 0) ? "짝수입니다" : "짝수가 아닙니다";
+      System.out.println("입력한 숫자 " + number + "는 " + result1);
+      sc.close();
+
+   }
+}
+
+========================================================================================
+package oper;
+//8번 : 비트연산자를 이용한 암호화와 복호화
+public class BitEncryption {
+   public static void main(String[] args) {
+      
+      //전달할 데이터(원본데이터)
+      int originalMsg = 42;
+      int key = 99; //비트 마스크(암호화, 복호화에 사용)
+      System.out.println("원본 메시지 : " + originalMsg);
+      
+      int encryptMsg = originalMsg ^ key; //xor 연산을 통한 암호화
+      System.out.println("암호화된 메세지 : " + encryptMsg);
+      
+      int decryptMsg = encryptMsg ^ key; //암호화된 메시지를 동일한 키로 xor 연산을 통한 복호화
+      System.out.println("복호화된 메세지 : " + decryptMsg);
+      
+   }
+
+}
+
+========================================================================================
+
+package ifTest;
+//9번 : 조건문(if문)
+public class ifTest01 { //클래스 시작
+   public static void main(String[] args) { //main 시작
+      
+      System.out.println("출력 시작");
+      
+      int number = 5;
+      if(number == 10) { //if문 시작
+//         System.out.println("if문의 조건식이 true입니다");
+//         System.out.println("숫자는 " + number + "입니다.");
+         
+         //조건식에서 number에 저장된 값이 10과 같다면
+         //number 10을 더한값을 저장후 number 출력
+//         number += 10; //number = number + 10;
+//         System.out.println(number);
+         
+         System.out.println("10입니다");
+         
+      } //if문 종료
+      System.out.println("10이 아닙니다.");
+      System.out.println("출력 끝");
+      
+   } //main 종료
+} //클래스 종료
+
+
+========================================================================================
+
+package ifTest;
+//10번 : if~else문
+public class IfTest02 { //클래스 시작
+   public static void main(String[] args) { //main 시작 
+      
+      System.out.println("출력 시작");
+      
+      if(false) { //if문 영역
+         System.out.println("조건식이 true입니다");
+      }else{
+         //else문 영역
+         System.out.println("조건식이 false입니다");
+      }
+      
+      System.out.println("출력 끝");
+      
+   } //main 종료
+}//클래스 종료
+
+
+========================================================================================
+
+package ifTest;
+
+import java.util.Scanner;
+
+//11번 : if~else문 실습1
+public class IfTask01 {
+   public static void main(String[] args) {
+      
+      //1. 사용자로부터 숫자를 입력받아서 짝수인지 홀수인지 출력하기
+      //로직구성
+      //1) 입력 클래스 import
+      //2) 정수형 변수 선언
+      //3) 입력 메시지 출력
+      //4) 변수 입력메소드 사용
+      //5) 조건문(if ~ else)문
+         //if 조건식 (산술연산자(%), 관계연산자(!=))
+         //   출력메소드
+         //else 
+         //   출력메소드
+      //6) 스캐너 닫기
+      
+      Scanner sc = new Scanner(System.in);
+      int choice = 0;
+      //자료형들의 기본값
+      //정수 0, 실수 0.0, 문자형 ' ', 문자열 "" or null, 논리형 false   
+      System.out.println("숫자 1개 입력 : ");
+      choice = sc.nextInt();
+      if(choice % 2 == 0) {
+         System.out.println("짝수입니다");
+      }else {
+         System.out.println("홀수입니다");
+      }
+      sc.close();
+      
+      
+   }
+}
+
+
+========================================================================================
+
+package ifTest;
+//12번 : if ~ else if ~ else문
+public class IfTest03 {
+   public static void main(String[] args) {
+      //양수, 음수, 0인지 출력하기
+      System.out.println("출력 시작");
+      
+      int num = 10;
+      
+      if (num > 0) {
+         System.out.println("양수입니다");
+      }else if (num < 0) {
+         System.out.println("음수입니다");
+      }else {
+         System.out.println("0입니다");
+      }
+      
+      if (num > 5 && num < 15) {
+         System.out.println("3보다 큽니다");
+      }else if (num > 5) {
+         System.out.println("5보다 큽니다");
+      }else {
+         System.out.println(num);
+      }
+      
+      System.out.println("출력 끝");
+   }
+
+}
+
+========================================================================================
+package ifTest;
+//13번 : if~if문, if~else if문 차이 / if문 중첩
+public class IfTest04 {
+   public static void main(String[] args) {
+      //if~if문 : 위의 조건식이 true라도 아래 if문의 조건식을 확인한다
+      int num = 10, grade = 100;
+      if(num > 5) {
+         System.out.println("num은 5보다 큽니다");
+      }
+      if(num > 3) {
+         System.out.println("num은 3보다 큽니다");
+      }
+      
+      //if~else if문 : 위의 조건식이 true면 아래 있는 조건식은 무시된다
+      if(num > 5) {
+         System.out.println("num은 5보다 큽니다");
+      }else if(num > 3) {
+         System.out.println("num은 3보다 큽니다");
+      }
+      
+      //if문 중첩
+      //90점 이상은 A, 100점은 만점으로 A 출력
+//      if(grade == 100) {
+//         System.out.println("만점으로 A");
+//      }else if(grade >= 90) {
+//         System.out.println("A");
+//      }
+      
+      if(grade >= 90) {
+         if(grade == 100) {
+            System.out.println("만점으로 A");
+         }else{
+            System.out.println("A");
+         }
+      }
+   }
+}
+
+========================================================================================
+========================================================================================
+========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
