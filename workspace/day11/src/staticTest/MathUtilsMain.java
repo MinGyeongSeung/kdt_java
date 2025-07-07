@@ -4,5 +4,4 @@ public class MathUtilsMain {
 	public static void main(String[] args) {
 		System.out.println(MathUtils.getMax(10, 20));
 	}
-
 }

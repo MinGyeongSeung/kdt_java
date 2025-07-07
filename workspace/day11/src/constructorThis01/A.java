@@ -7,7 +7,7 @@ public class A {
    
    //메소드
    void method(int num) {
-      int num2; 
+      int num2;
       System.out.println(this);
       System.out.println("매개변수 num : "+ num);
       System.out.println("필드의 num : "+ this.num);

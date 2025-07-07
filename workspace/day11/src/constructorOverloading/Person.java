@@ -51,9 +51,7 @@ public class Person {
    public Person(String name, int age, String job) {
       this(name, job);
       this.age = age;
-      
    }
-
 }
 
 

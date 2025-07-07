@@ -15,7 +15,6 @@ class Student{
 //      System.out.println("매개변수가 1개인 생성자가 호출되었습니다");
       System.out.println(this);
    }
-   
 }
 
 public class StudentMain {

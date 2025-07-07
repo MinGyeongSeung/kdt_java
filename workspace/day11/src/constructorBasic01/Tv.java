@@ -57,7 +57,6 @@ public class Tv {
       } else {
          System.out.println("전원을 먼저 켜주세요");
       }
-      
    }
 
    // 볼륨을 내릴 수 있는 메소드

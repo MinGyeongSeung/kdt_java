@@ -28,7 +28,6 @@ public class SongMain {
 
       // 매개변수 x, 리턴값 x
       song.diplayInfo();
-
    }
 
 }

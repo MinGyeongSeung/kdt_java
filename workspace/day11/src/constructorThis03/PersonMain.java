@@ -8,6 +8,7 @@ public class PersonMain {
       Person p4 = new Person("유리", "학생");
       Person p5 = new Person("김영선", 20, "학생");
       
+      
       System.out.println(p3);
       System.out.println(p5);
       p3.printInfo();

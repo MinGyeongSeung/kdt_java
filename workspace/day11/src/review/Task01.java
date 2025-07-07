@@ -32,7 +32,6 @@ public class Task01 {
          String grade = t1.getGrade(scores[i][0], scores[i][1], scores[i][2]);
          System.out.println((i+1) + "번 학생의 학점 : " + grade);
       }
-      
    }
    // 1. 문자열 속의 단어를 공백 기준으로 세기
    // 메소드명 : countWord

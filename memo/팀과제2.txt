@@ -1,0 +1,292 @@
+* Class   
+   1. BurgerMain      //메인클래스
+   2. OrderManager      //관리시스템
+   3. PurchaseOrder    // 주문서
+   4. Burger         //버거 정보
+   5. BurgerMenu      //버거 메뉴 정보
+   6. Customer      //고객 정보
+
+1. BurgerMain      //메인클래스
+필드
+   OrderManager orderManager;
+메소드
+   boolean isCorrectPhoneNumber(String phoneNumber)
+   boolean login(String phoneNumber)
+   Customer createCustomerInfo(Scanner sc, String phoneNumber)
+   boolean checkInput(String str, Scanner sc)
+   void printMenu()
+   BurgerMenu inputMenu(Scanner sc)
+   void printPurchaseOrder(PurchaseOrder[] purchaseOrderArr)
+
+   public static void main(String[] args)
+
+2. OrderManager   //관리시스템
+필드
+   int totalMoney;
+   final int MAX_ORDER_COUNT;
+
+   final int MAX_BURGER;
+
+
+   int currentOrderCount;
+   PurchaseOrder[] purchaseOrderArr;
+
+   BurgerMenu[] burgerMenuArr;
+
+   final int MIN_ORDER_AMOUNT;
+
+   int currentCustomerCount;
+   Customer[] customerArr;
+생성자
+   public OrderManager()
+메소드
+   BurgerMenu getBurgerItem(int burgerId)
+   int[] getBurgerMenuIdArr()
+   int isExistCustomer(String phoneNumber)
+   boolean addCustomer(Customer customer)
+   boolean canOrder()
+   boolean sell(String phoneNumber, Burger[] burgerList)
+   boolean refund(String phoneNumber, int orderNumber)
+   int[] canRefund(String phoneNumber, int orderNumber)
+   int isExistOrderNumber(String phoneNumber, int orderNumber)
+   int isExistOrderNumber(int orderNumber)
+   boolean deliver(int total)
+   PurchaseOrder[] getPurchaseOrder(String phoneNumber)
+
+3. PurchaseOrder    // 주문서
+필드
+   static int currentOrderNumber;
+   int orderNumber;
+   String phoneNumber;
+   
+   Burger[] burgerList;
+   int total;
+생성자
+   public PurchaseOrder(String phoneNumber, Burger[] burgerList)
+메소드
+   void initBurgerList(Burger[] burgerList)
+   int calculateTotal()
+
+4. Burger         //버거 정보
+필드
+   int burgerId;
+   String burgerName;
+   int price;
+   
+   boolean isSet;
+생성자
+   public Burger(int burgerId, String burgerName, int price, boolean isSet)
+5. BurgerMenu      //버거 메뉴 정보
+필드
+   static int currentBurgerId;
+   
+   int burgerId;
+   
+   int burgerPrice;
+   int setPrice;
+
+   String burgerName;
+생성자   
+   public BurgerMenu(int burgerId, String burgerName, int burgerPrice, int setPrice)
+메소드
+   public int getPrice(boolean isSet) 
+   public int getSetPrice() 
+   public int getBurgerPrice(
+6. Customer      //고객 정보
+필드
+   String name;
+   String address;
+   String phoneNumber;
+   
+   int[] orderNumberArr;
+생성자
+   public Customer(String name, String address, String phoneNumber)
+   public Customer(String name, String address, String phoneNumber, int orderMaxCount)
+메소드
+   void initOrderNumberArr(int orderMaxCount)
+   int isExistOrderNumber(int orderNumber)
+   boolean addOrder(int orderNumber)
+   boolean refundOrder(int orderNumber)
+   int addOrderNumberArrIdx()
+
+=============================================================================================================
+
+class PurchaseOrder // 주문서
+* 필드
+   static int currentOrderNumber; // 현재 주문 번호
+   int orderNumber; // 주문 번호
+   String phoneNumber; // 전화 번호(고객 구분 값)
+   
+   Burger[] burgerList; // 주문한 버거 정보 배열
+   int total; // 해당 주문서의 총 가격
+* 생성자
+   public PurchaseOrder(String phoneNumber, Burger[] burgerList)
+* 메소드
+   // 주문한 버거 배열 배열 초기화
+   // 리턴타입 : void
+   // 매개변수 : Burger[] 주문받은 버거정보 배열
+   void initBurgerList(Burger[] burgerList)
+   
+   // 주문서의 총 가격 계산
+   // 리턴타입 : int 총가격
+   // 매개변수 : x
+   int calculateTotal()
+
+=============================================================================================================
+
+class OrderManager
+* 핃드
+   int totalMoney; // 총 매출
+   
+   final int MAX_ORDER_COUNT; // 최대 주문 수
+   
+   final int MAX_BURGER; // 한 주문서 당 최대 버거 수
+   int currentOrderCount; // 현재 누적 주문 수
+   PurchaseOrder[] purchaseOrderArr; // 주문서 배열
+
+   BurgerMenu[] burgerMenuArr; // 버거 종류 정보
+
+   final int MIN_ORDER_AMOUNT; // 최소 배달 주문 금액
+
+   int currentCustomerCount; // 현재 고객 수
+   Customer[] customerArr; // 고객 정보 배열
+* 생성자
+   public OrderManager(); // 생성자
+   
+   // 버거 id를 통해 버거 메뉴 정보를 조회
+   // 리턴타입 : 버거 메뉴 정보
+   // 매개변수 : 버거 id
+   BurgerMenu getBurgerItem(int burgerId);
+
+   // 버거 id 배열 반환
+   // 리턴타입 : int[] 버거메뉴아이디배열
+   // 매개변수 : x
+   int[] getBurgerMenuIdArr()
+
+   // 고객 조회 
+   // 리턴타입 : int 고객의 배열 인덱스 값
+   // 매개변수 : String 전화번호
+   int isExistCustomer(String phoneNumber)
+
+   // 고객 등록
+   // 리턴타입 : boolean 추가성공여부 
+   // 매개변수 : Customer 고객정보
+   boolean addCustomer(Customer customer)
+
+   //주문 // 주문서 확인 // 황승우 //주문 가능한지 확인 갯수
+   // 리턴타입 : boolean 주문가능한지
+   // 매개변수 : x
+   boolean canOrder()
+
+   // 판매 // 주문서추가 //이서진
+   // 리턴타입 : boolean 판매성공여부
+   // 매개변수 : String 고객구분값, Burger[] 구매하고자하는 버거 정보 배열
+   boolean sell(String phoneNumber, Burger[] burgerList)
+
+   // 환불 // 주문서 삭제 // 고객에 있는 주문아이디 삭제 //이남혁
+   // 리턴타입 : boolean
+   // 매개변수 : String 고객구분값, int 주문번호
+   boolean refund(String phoneNumber, int orderNumber)
+
+   // 환불 가능한지 여부 반환
+   // 리턴타입 : int 0번 : 주문서배열의 인덱스, 1번 : 고객배열의 인덱스
+   // 매개변수 : String 고객구분값, int 주문번호
+   int[] canRefund(String phoneNumber, int orderNumber)
+
+   // 주문 번호 조회
+   // 리턴타입 : int 고객배열인덱스값
+   // 매개변수 : String 고객구분값, int 주문번호ing 
+   int isExistOrderNumber(String phoneNumber, int orderNumber) // 고객에게 주문번호 있는지 확인
+
+   // 주문 번호 조회
+   // 리턴타입 : int 주문서 배열 인덱스 값
+   // 매개변수 : int 주문번호
+   int isExistOrderNumber(int orderNumber) // 관리 시스템에 주문번호 있는지 확인
+
+   /고객배달(); // 고객 배달 // 최소금액확인 //민경승
+   // 리턴타입 : boolean 배달 가능 여부
+   // 매개변수 : int 총구매액
+   boolean deliver(int total)
+
+   // 주문리스트조회(고객정보)
+   // 리턴타입 : PurchaseOrder[] 주문서 배열 반환
+   // 매개변수 : String 고객구분값
+   PurchaseOrder[] getPurchaseOrder(String phoneNumber)
+
+==============================================================================================================
+
+
+
+public class ManagementSystem {
+    int minDeliveryAmount = 10000; // 최소 배달 금액 (예: 10,000원)
+    Order[] orderList; // 주문서 배열
+    Customer[] customerList; // 고객 배열
+    int orderCount;
+
+    // 생성자 예시
+    public ManagementSystem() {
+        orderList = new Order[100];
+        customerList = new Customer[100];
+        orderCount = 0;
+    }
+
+    // 민경승 – 고객배달 메소드
+    public void deLivery(String pHone) {
+        boolean found = false;
+
+        for (int i = 0; i < orderCount; i++) {
+            if (orderList[i] != null && orderList[i].getPhoneNumber().equals(phoneNumber)) {
+                int totalPrice = orderList[i].calculateTotal();
+
+                System.out.println("총 주문 금액은 " + totalPrice + "원입니다.");
+
+                if (totalPrice >= minDeliveryAmount) {
+                    System.out.println("배달이 시작됩니다. 감사합니다!");
+                } else {
+                    System.out.println("죄송합니다. 최소 배달 금액은 " + minDeliveryAmount + "원 이상이어야 합니다.");
+                }
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("해당 전화번호의 주문 정보를 찾을 수 없습니다.");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class Order {
+    String phoneNumber;
+    Burger[] burgers;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public int calculateTotal() {
+        int sum = 0;
+        for (int i = 0; i < burgers.length; i++) {
+            if (burgers[i] != null) {
+                if (burgers[i].isSet) {
+                    sum += burgers[i].setPrice;
+                } else {
+                    sum += burgers[i].burgerPrice;
+                }
+            }
+        }
+        return sum;
+    }
+}

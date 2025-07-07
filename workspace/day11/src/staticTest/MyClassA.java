@@ -25,7 +25,6 @@ public class MyClassA {
    // 인스턴스 메소드2
    void instanceMethod2() {
       System.out.println("인스턴스 메소드2 호출되었습니다");
-
    }
 
    // 스태틱 메소드1
@@ -42,8 +41,6 @@ public class MyClassA {
    // 스태틱 메소드2
    static void staticMethod2() {
       System.out.println("스태틱 메소드2 호출되었습니다");
-
    }
-
 }
 

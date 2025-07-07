@@ -98,7 +98,7 @@ day12(java 10일차)
 
 	열거형 배열
 		values() 모든 열거형 값을 배열로 얻을 수 있다
-	name(), valueOf()
+		name(), valueOf()
 		name() : 열거형 이름(문자열)을 반환
 		valueOf(문자열) : 문자열을 열거형 값으로 반환
 
@@ -120,8 +120,26 @@ day12(java 10일차)
 
 클론후 내 브런치 따기
 
-https://github.com/MinGyeongSeung/kdt_java.git
+오후 팀 과제 진행
 
+[팀장]
+1. GIT-HUB 레포만들기
+2. 폴더 구조(패키지, 클래스 등 만들기)
+   - 메소드 위치 선정(주석으로)
+   - gitignore 파일
+   - readme.md 파일
+      문제
+      이름 - 기능 구현 내용
+3. main브랜치에서 커밋 -> github 레포로 push
+4. 팀원에게 클론따라고 말하기
+5. 개인 브랜치 생성
+
+[팀원]
+1. 폴더구조 확인 후 클론
+2. 개인 브랜치 생성
+3. 본인이 만들어야하는 메소드 확인
+
+====================================================
 
 # Compiled class file
 *.class
@@ -307,11 +325,10 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse,macos
 
 
+https://github.com/MinGyeongSeung/kdt_java.git
 
-
-
-
-
+팀장 => 레포지토리
+	팀원 초대 => 팀원 이메일 확인
 
 
 
